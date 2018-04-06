@@ -1,6 +1,4 @@
 from flask import request, redirect, render_template, session, flash
-# from flask_sqlalchemy import SQLAlchemy
-# from models import User, Movie
 import cgi
 from app import app, db
 from models import User, Movie
@@ -63,9 +61,7 @@ def register():
         return render_template('register.html')
 
 def is_email(string):
-    # for our purposes, an email string has an '@' followed by a '.'
-    # there is an embedded language called 'regular expression' that would crunch this implementation down
-    # to a one-liner, but we'll keep it simple:
+#could use regex here to simplify
     atsign_index = string.find('@')
     atsign_present = atsign_index >= 0
     if not atsign_present:
@@ -158,10 +154,7 @@ def require_login():
         return redirect("/register")
 
 
-# In a real application, this should be kept secret (i.e. not on github)
-# As a consequence of this secret being public, I think connection snoopers or
-# rival movie sites' javascript could hijack our session and act as us,
-# perhaps giving movies bad ratings - the HORROR.
+# In a real application, this would be kept secret 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RU'
 
 if __name__ == "__main__":
